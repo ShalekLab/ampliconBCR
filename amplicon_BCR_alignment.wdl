@@ -49,8 +49,8 @@ workflow amplicon_BCR_alignment {
 				sample_name = sample_paired_fastq.left,
 				paired_fastq = sample_paired_fastq.right,
 				blast_directory = blast_directory,
-				species = "human",
-				receptor_gene_chain = "IGH",
+				species = species_heavy,
+				receptor_gene_chain = receptor_gene_chain_heavy,
 				docker = migmap_docker,
 				preemptible = preemptible,
 				zones = zones
@@ -62,8 +62,8 @@ workflow amplicon_BCR_alignment {
 				sample_name = sample_paired_fastq.left,
 				paired_fastq = sample_paired_fastq.right,
 				blast_directory = blast_directory,
-				species = "mouse",
-				receptor_gene_chain = "IGK,IGL",
+				species = species_light,
+				receptor_gene_chain = receptor_gene_chain_light,
 				docker = migmap_docker,
 				preemptible = preemptible,
 				zones = zones

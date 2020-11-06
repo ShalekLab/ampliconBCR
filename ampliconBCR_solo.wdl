@@ -22,8 +22,8 @@ workflow amplicon_BCR_alignment {
 		call panda_express as panda_express {
 			input:
 				sample_name = sample.Sample,
-				fastq_R1 = sample.HCR1,
-				fastq_R2 = sample.HCR2,
+				fastq_R1 = sample.R1,
+				fastq_R2 = sample.R2,
 				docker = pandaseq_docker,
 				zones = zones,
 				preemptible = preemptible,
@@ -167,7 +167,7 @@ task consensus {
 	}
 	command <<<
 		set -e
-		
+
 		python <<CODE
 		import os
 		print("Moving files to /cromwell_root/")
@@ -179,9 +179,10 @@ task consensus {
 
 		echo "Collecting MiGMAP results"
 		python /scripts/collect_migmap_results_BCR.py
+		echo "DONE"
 	>>>
 	output {
-		File consensus_alignments = "/cromwell_root/out/consensus_alignments.txt"
+		File consensus_alignments = "/cromwell_root/consensus_alignments.txt"
 	}
 	runtime {
 		docker: docker
